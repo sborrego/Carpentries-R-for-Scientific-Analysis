@@ -9,22 +9,177 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Overview of Curriculum
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+### Part 1
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+* Introduction to R and RStudio
+* Data Structures
+* Exploring Data Frames
+* Subsetting Data
 
-```{r cars}
-summary(cars)
+### Part 2
+
+* Control Flow
+* Plotting with `ggplot2`
+
+### Part 3
+
+* Vectorization
+* Functions
+* Splitting and Combining Data Frames with `plyr`
+
+### Part 4
+
+* Data Frame Manipulation with `dplyr`
+* Data Frame Manipulation with `tidyr`
+* Producing Reports with `knitr`
+
+
+# Part 1 (Stacey is currently working on)
+
+### Introduction to R and RStudio
+
+#### R as a calculator
+
+```{r eval=FALSE}
+3 + 5
+12 / 7
+3 * 4
+8 ^ 2
+log(8)
+3 + 5 / 2
+(3 + 5) / 2
+``` 
+
+#### Comparisons
+
+```{r eval=FALSE}
+1 == 1
+1 != 2
+1 < 2
+1 <= 1
+1 > 0
+1 >= -9
+``` 
+
+#### Variables and Assigment
+
+```{r eval=FALSE}
+x <- 1/40
 ```
 
-## Including Plots
+* Assignment operator (<-)
+* Cannot start with numbers
+* Case sensitive
+* Avoid function names
+* Avoid dots (.)
+* Be consistent in the styling of your code
+     + [R Style Guide](https://google.github.io/styleguide/Rguide.html)
+     + Styles can include “lower_snake”, “UPPER_SNAKE”, “lowerCamelCase”, “UpperCamelCase”, etc
+     + We will use "lower_snake" for readibility during this workshop 
 
-You can also embed plots, for example:
+Print the value of an object
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r eval=FALSE}
+x
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#### Reassignment
+
+```{r eval=FALSE}
+x <- 100
+
+x <- x + 1 
+y <- x * 2
+
+```
+
+#### Vectorization
+
+```{r eval=FALSE}
+1:5
+2^(1:5)
+```
+
+#### Managing Your Environment
+
+```{r eval=FALSE}
+ls()
+rm()
+sessionInfo()
+?ls
+```
+
+* You can see what packages are installed by typing `installed.packages()`
+* You can install packages by typing `install.packages("packagename")`, where packagename is the package name, in quotes.  
+* You can update installed packages by typing `update.packages()`
+* You can remove a package with `remove.packages("packagename")`
+* You can make a package available for use with `library(packagename)`
+
+#### Creating a New Project
+
+**We’re going to create a new project in RStudio:**
+
+* Click the “File” menu button, then “New Project”.
+* Click “New Directory”.
+* Click “New Project”.
+* Type in the name of the directory to store your project, e.g. “my_project”.
+* Click the “Create Project” button.
+
+
+**Recommendations for project organization:**
+
+* Put each project in its own directory, which is named after the project.
+* Put text documents associated with the project in the doc directory.
+* Put raw data and metadata in the data directory, and files generated during cleanup and  analysis in a results directory.
+* Put source for the project’s scripts and programs in the src directory, and programs brought in from elsewhere or compiled locally in the bin directory.
+* Name all files to reflect their content or function.
+
+**Download the gapminder data from here.**
+
+* Download the file (right mouse click on the link above -> “Save link as” / “Save file as”, or click on the link and after the page loads, press Ctrl+S or choose File -> “Save page as”)
+* Make sure it’s saved under the name gapminder_data.csv
+* Save the file in the data/ folder within your project.
+
+
+### Data Structures
+
+#### Reading and writing data
+
+Make a toy dataset
+
+```{r eval=FALSE}
+cats <- data.frame(coat = c("calico", "black", "tabby"),
+                    weight = c(2.1, 5.0, 3.2),
+                    likes_string = c(1, 0, 1))
+```
+
+
+Write it out as a csv file in your data directory
+
+```{r eval=FALSE}
+write.csv(x = cats, file = "data/feline-data.csv", row.names = FALSE)
+```
+
+### Exploring Data Frames
+### Subsetting Data
+
+# Part 2
+
+### Control Flow
+### Plotting with `ggplot2`
+
+# Part 3
+
+### Vectorization
+### Functions
+### Splitting and Combining Data Frames with `plyr`
+
+# Part 4
+
+### Data Frame Manipulation with `dplyr`
+### Data Frame Manipulation with `tidyr`
+### Producing Reports with `knitr`
+
+
