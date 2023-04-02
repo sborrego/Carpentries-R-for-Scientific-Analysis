@@ -36,7 +36,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * Producing Reports with `knitr`
 
 
-# Part 1 (Stacey is currently working on)
+# Part 1
 
 ### Introduction to R and RStudio
 
@@ -145,6 +145,75 @@ sessionInfo()
 
 ### Data Structures
 
+
+
+#### Data Types
+
+```{r eval=FALSE}
+typeof(3.14)
+typeof(1L)
+typeof(1+1i)
+typeof('banana')
+typeof(TRUE)
+```
+
+#### Vectors and Coersion
+
+When R encounters a mix of types (here numeric and character) to be combined 
+into a single vector, it will force them all to be the same type. 
+
+The coercion rules go: logical -> integer -> numeric -> complex -> character, 
+where -> can be read as are transformed into. 
+
+```{r eval=FALSE}
+
+combine <- c(2,6,3)
+combine
+
+quiz <- c(2,6,'3')
+quiz
+
+coercion <- c('a', TRUE)
+coercion
+
+coercion2 <- c(8, TRUE, FALSE)
+coercion2
+
+```
+
+You can try to force coercion against this flow using the `as.` functions:
+
+```{r eval=FALSE}
+char <- c('0','2','4')
+
+num <- as.numeric(char)
+typeof(num)
+
+log <- as.logical(num)
+typeof(log)
+
+```
+
+Combine vectors
+
+```{r eval=FALSE}
+ab <- c('a', 'b')
+ab
+
+combine <- c(ab, 'SWC')
+combine
+```
+
+Name elements in a vector
+
+```{r eval=FALSE}
+my_example <- 5:8
+names(my_example)
+
+names(my_example) <- c("a", "b", "c", "d")
+names(my_example)
+```
+
 #### Reading and writing data
 
 Make a toy dataset
@@ -162,13 +231,129 @@ Write it out as a csv file in your data directory
 write.csv(x = cats, file = "data/feline-data.csv", row.names = FALSE)
 ```
 
+
+Read the data file
+
+```{r eval=FALSE}
+cats <- read.csv(file = "data/feline-data.csv", stringsAsFactors = TRUE)
+cats
+```
+
+Columns in data frames are vectors
+
+```{r eval=FALSE}
+str(cats$weight)
+str(cats$likes_string)
+str(cats$coat)
+```
+
+Types of data
+
+```{r eval=FALSE}
+typeof(cats$weight)
+
+cats$likes_string
+cats$likes_string <- as.logical(cats$likes_string)
+cats$likes_string
+```
+
+Rename columns of a data frame
+
+```{r eval=FALSE}
+names(cats)
+names(cats)[2] <- "weight_kg"
+cats
+```
+
+#### Factors
+
+```{r eval=FALSE}
+coats <- c('tabby', 'tortoiseshell', 'tortoiseshell', 'black', 'tabby')
+coats
+
+str(coats)
+
+CAT <- factor(coats)
+class(CAT)
+str(CAT)
+
+typeof(coats)
+typeof(CAT)
+
+```
+
+default factors are labelled in alphabetical order. You can change this by specifying the levels:
+
+```{r eval=FALSE}
+mydata <- c("case", "control", "control", "case")
+factor_ordering_example <- factor(mydata, levels = c("control", "case"))
+str(factor_ordering_example)
+```
+
+#### Lists
+
+Another data structure you’ll want in your bag of tricks is the list. A list is simpler in some ways than the other types, because you can put anything you want in it. Remember everything in the vector must be the same basic data type, but a list can have different data types:
+
+```{r eval=FALSE}
+list_example <- list(1, "a", TRUE, 1+4i)
+list_example
+
+another_list <- list(title = "Numbers", numbers = 1:10, data = TRUE )
+another_list
+
+typeof(cats)
+```
+
+We see that data.frames look like lists ‘under the hood’ - this is because a data.frame is really a list of vectors and factors, as they have to be - in order to hold those columns that are a mix of vectors and factors, the data.frame needs something a bit more flexible than a vector to put all the columns together into a familiar table. In other words, a data.frame is a special list in which all the vectors must have the same length.
+
+In our cats example, we have an integer, a double and a logical variable. As we have seen already, each column of data.frame is a vector.
+
+
+```{r eval=FALSE}
+cats$coat
+typeof(cats[,1])
+str(cats[,1])
+```
+
+Each row is an observation of different variables, itself a data.frame, and thus can be composed of elements of different types.
+
+```{r eval=FALSE}
+cats[1,]
+typeof(cats[1,])
+str(cats[1,])
+```
+
+#### Matrices
+
+```{r eval=FALSE}
+matrix_example <- matrix(0, ncol=6, nrow=3)
+matrix_example
+
+class(matrix_example)
+typeof(matrix_example)
+str(matrix_example)
+dim(matrix_example)
+nrow(matrix_example)
+ncol(matrix_example)
+```
+
 ### Exploring Data Frames
+
+See [Manipulating Data Frame](https://swcarpentry.github.io/r-novice-gapminder/05-data-structures-part2/index.html)
+
 ### Subsetting Data
+
+See [Subsetting](https://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting/index.html)
 
 # Part 2
 
 ### Control Flow
+
+See [Control Flow](https://swcarpentry.github.io/r-novice-gapminder/07-control-flow/index.html)
+
 ### Plotting with `ggplot2`
+
+See [ggplot2](https://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2/index.html)
 
 # Part 3
 
